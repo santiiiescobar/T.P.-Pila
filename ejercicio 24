@@ -1,0 +1,67 @@
+class PersonajeMCU:
+    def __init__(self, nombre, peliculas):
+        self.nombre = nombre
+        self.peliculas = peliculas
+
+def posicion_rocket_groot(pila_personajes):
+    posicion_rocket = None
+    posicion_groot = None
+    for i, personaje in enumerate(pila_personajes):
+        if personaje.nombre == "Rocket Raccoon":
+            posicion_rocket = len(pila_personajes) - i
+        elif personaje.nombre == "Groot":
+            posicion_groot = len(pila_personajes) - i
+    return posicion_rocket, posicion_groot
+
+def personajes_mas_de_5_peliculas(pila_personajes):
+    personajes_mas_de_5 = []
+    for personaje in pila_personajes:
+        if personaje.peliculas > 5:
+            personajes_mas_de_5.append((personaje.nombre, personaje.peliculas))
+    return personajes_mas_de_5
+
+def contar_peliculas_viuda_negra(pila_personajes):
+    contador = 0
+    for personaje in pila_personajes:
+        if personaje.nombre == "Black Widow":
+            contador += personaje.peliculas
+    return contador
+
+def mostrar_personajes_cdg(pila_personajes):
+    personajes_cdg = []
+    for personaje in pila_personajes:
+        if personaje.nombre.startswith(("C", "D", "G")):
+            personajes_cdg.append(personaje.nombre)
+    return personajes_cdg
+
+personajes = [
+    PersonajeMCU("Iron Man", 10),
+    PersonajeMCU("Captain America", 8),
+    PersonajeMCU("Thor", 9),
+    PersonajeMCU("Black Widow", 7),
+    PersonajeMCU("Hulk", 4),
+    PersonajeMCU("Hawkeye", 5),
+    PersonajeMCU("Rocket Raccoon", 4),
+    PersonajeMCU("Groot", 4),
+    PersonajeMCU("Drax", 3),
+]
+
+pila_personajes = list(reversed(personajes))
+
+posicion_rocket, posicion_groot = posicion_rocket_groot(pila_personajes)
+print(f"Rocket Raccoon está en la posición {posicion_rocket} de la pila")
+print(f"Groot está en la posición {posicion_groot} de la pila\n")
+
+personajes_mas_de_5 = personajes_mas_de_5_peliculas(pila_personajes)
+print("Personajes que participaron en más de 5 películas de la saga:")
+for personaje in personajes_mas_de_5:
+    print(f"{personaje[0]} ({personaje[1]} películas)")
+print()
+
+contador_viuda_negra = contar_peliculas_viuda_negra(pila_personajes)
+print(f"La Viuda Negra participó en {contador_viuda_negra} películas\n")
+
+personajes_cdg = mostrar_personajes_cdg(pila_personajes)
+print("Personajes cuyos nombres empiezan con C, D y G:")
+for personaje in personajes_cdg:
+    print(personaje)
